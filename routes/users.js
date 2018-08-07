@@ -12,6 +12,22 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, db) => {
     console.log("Yhteys Mongoon saatu");
     const kokoelma = dbo.collection('tasks');
 
+    router.route('/')
+        .get(function (req, res) {
+            kokoelma.find({}).toArray().then((result) => {
+                console.log(res);
+                res.json(result);
+            }).catch(function (err) {
+                console.log(err.stack);
+            });
+        })
+        .post((req, res) => {
+            kokoelma.save(req.body, (err, result) => {
+                if (err) return console.log(err);
+                console.log('saved to database');
+                res.redirect('/')
+            })
+        })
 });
 
 module.exports = router;
