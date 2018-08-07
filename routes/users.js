@@ -28,6 +28,13 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, db) => {
                 res.redirect('/')
             })
         })
+        .delete((req, res) => {
+            kokoelma.findOneAndDelete({name: req.body.name},
+                (err, result) => {
+                    if (err) return res.send(500, err);
+                    res.send({message: 'object deleted'})
+                })
+        })
 });
 
 module.exports = router;
