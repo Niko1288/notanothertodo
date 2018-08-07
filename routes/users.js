@@ -10,7 +10,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, (err, db) => {
     }
     const dbo = db.db();
     console.log("Yhteys Mongoon saatu");
-    const kokoelma = dbo.collection('list');
+    const kokoelma = dbo.collection('tasks');
 
 });
 
