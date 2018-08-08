@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 // luopaan express appi
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({extended: true}))
 
@@ -27,5 +30,6 @@ app.get('/', (req, res) => {
 
 //otetaan käyttöön muistioiden reitit
 require('./app/routes/note.routes')(app);
+
 
 module.exports = app;
