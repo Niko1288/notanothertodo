@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To Do App</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Nothing You Could Do' rel='stylesheet'>
+    <!--<script src="listaus.js"></script>-->
+</head>
+
+<body>
+<img  src="ToDoListAppGIF.jpeg" alt="My picture" class="center"/>
+
+<h2 onclick="piilotaeka()">Listaa asioita</h2>
+<button style="display: none" id="eka" onclick="haeKaikki()">Hae kaikki</button>
+
+<h2 onclick="piilotatoka()">Tehdyt taskit</h2>
+<form id="toka" style="display: none">
+    Valmiit: <input id="done" type="text"/><br>
+    <input value="Hae" type="button" id="btn" onclick="haeValmiit(document.getElementById('done').value);">
+</form>
+
+<h2 onclick="piilotakolmas()">Statistiikkaa</h2>
+<form id="kolmas" style="display: none">
+    Aikajärjestys <input id="stats" type="text"/><br>
+    <input value="Hae" type="button" id="btn1" onclick="haeStatseilla(document.getElementById('createdAT').value);">
+</form>
+
+<table id="tulos"></table>
+
+
+<script>
+    var lista = document.getElementById("tulos");
+    function haunTulokset(tulos) {
+        poistaTaulu();
+        var table = document.createElement("table");
+        var tBody = document.createElement("tbody");
+        tBody.setAttribute("id", "tulokset");
+        var tHead = document.createElement("thead");
+        var otsikkoRivi = document.createElement("tr");
+        var otsikko1 = document.createElement("th");
+        otsikko1.appendChild(document.createTextNode("otsikko"));
+        var otsikko2 = document.createElement("th");
+        otsikko2.appendChild(document.createTextNode("sisalto"));
+        otsikkoRivi.appendChild(otsikko1);
+        otsikkoRivi.appendChild(otsikko2);
+        tHead.appendChild(otsikkoRivi);
+        table.appendChild(tHead);
+        table.appendChild(tBody);
+
+        for (var i = 0; i< tulos.length; i++) {
+            var taski = tulos[i];
+            var tulosRivi = document.createElement("tr");
+            var tieto1 = document.createElement("td");
+            tieto1.appendChild(document.createTextNode(taski.title));
+            var tieto2 = document.createElement("td");
+            tieto2.appendChild(document.createTextNode(taski.content));
+            tulosRivi.appendChild(tieto1);
+            tulosRivi.appendChild(tieto2);
+            tBody.appendChild(tulosRivi);
+            lista.appendChild(table);
+        }
+    }
+
+    function haeKaikki() {
+        var pyynto = new XMLHttpRequest();
+        pyynto.onreadystatechange = function () {
+            if (pyynto.readyState === 4 && pyynto.status === 200) {
+                var tulos = JSON.parse(pyynto.responseText);
+
+                console.dir(tulos);
+                haunTulokset(tulos);
+                return lista;
+            }
+        };
+        pyynto.open('GET', 'http://localhost:3000/notes', true);
+        pyynto.send();
+    }
+
+    // function haeOtsikko(otsikko) {
+    //     var pyynto = new XMLHttpRequest();
+    //     pyynto.onreadystatechange = function () {
+    //         if (pyynto.readyState === 4 && pyynto.status === 200) {
+    //             var tulos = JSON.parse(pyynto.responseText);
+    //             var taskit = tulos.filter(function(notes) {
+    //                 return notes.title === otsikko;
+    //             });
+    //             console.dir(taskit);
+    //             haunTulokset(taskit);
+    //             return lista;
+    //         }
+    //     };
+    //     pyynto.open('GET', 'http://localhost:3000/notes/', true);
+    //     pyynto.send();
+    // }
+    //
+    // function haeSisalto(sisalto) {
+    //     var pyynto = new XMLHttpRequest();
+    //     pyynto.onreadystatechange = function () {
+    //         if (pyynto.readyState === 4 && pyynto.status === 200) {
+    //             var tulos = JSON.parse(pyynto.responseText);
+    //             var taskit = tulos.filter(function (notes) {
+    //                 return notes.content === sisalto;
+    //             });
+    //             console.dir(taskit);
+    //             haunTulokset(taskit);
+    //             return lista;
+    //         }
+    //     };
+    //     pyynto.open('GET', 'http://localhost:3000/notes/', true);
+    //     pyynto.send();
+    // }
+
+    function poistaTaulu() {
+        while (lista.firstChild) {
+            lista.removeChild(lista.firstChild);
+        }
+    }
+</script>
+
+<script>
+    function piilotatoka() {
+        var x = document.getElementById("toka");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+    function piilotaeka() {
+        var x = document.getElementById("eka");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+    function piilotakolmas() {
+        var x = document.getElementById("kolmas");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+</script>
+</body>
+
+</html>
