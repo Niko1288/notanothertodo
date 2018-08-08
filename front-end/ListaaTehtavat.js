@@ -1,5 +1,53 @@
+function reqlistener () {
+    console.log(this.responseText);
+}
 
-// funktio lähettää datan mongoon aina kun lisätään uusi tehtävö
+var oreq = new XMLHttpRequest();
+oreq.addEventListener("load", reqlistener);
+oreq.open("GET", "http://localhost:3000/notes");
+oreq.send();
+
+
+// tässä haetaan kaikki sivulle onload
+$(function() {
+
+    var $lista = $("#myUL");
+    var baseurl = 'http://localhost:3000/notes';
+
+    function haekaikki() {
+        console.log("jotain");
+        fetch(baseurl)
+            .then(function (tulokset) {
+                return tulokset.json();
+            })
+            .then(function (taulukko) {
+                for (var i = 0; i < taulukko.length; i++) {
+                    var notes = taulukko[i];
+                    console.log(notes);
+                    var span = document.createElement("SPAN");
+                    var txt = document.createTextNode("\u00D7");
+                    span.className = "close";
+                    span.appendChild(txt);
+                        close[i].onclick = function () {
+                            var div = this.parentElement;
+                            div.style.display = "none";
+                            poistaTehtava();
+
+                        }
+                    lista[i].appendChild(span);
+                    $("<li>")
+                        .text(notes.title)
+                        .appendTo($lista);
+
+                }
+            })
+    }
+
+    haekaikki();
+});
+
+
+// funktio lähettää datan mongoon aina kun lisätään uusi tehtävä
 function uusiTehtava() {
     var XHR = new XMLHttpRequest();
     // Define what happens on successful data submission
@@ -110,7 +158,7 @@ for (i = 0; i < close.length; i++) {
     close[i].onclick = function () {
         var div = this.parentElement;
         div.style.display = "none";
-        poistaTehtava(poistettavadata);
+        poistaTehtava();
 
     }
 }
@@ -128,4 +176,23 @@ list.addEventListener('click', function (ev) {
 
 //////////////////////////
 
+// funktio jota kutsumalla haetaan kaikki tehtävät tietokannasta
+//
+// function haeKaikki() {
+//     var XHR = new XMLHttpRequest();
+//     XHR.onreadystatechange = function () {
+//         console.log("DBG", XHR.readyState);
+//         if (XHR.readyState === 4) {
+//             console.log(XHR.statusText);
+//             if (XHR.status === 200) {
+//                 console.log("vastaus", XHR.responseText);
+//                 newElement(JSON.parse(XHR.responseText));
+//             }
+//         }
+//     }
+//     XHR.open('GET', 'http://localhost:3000/notes');
+//     XHR.setRequestHeader('Content-Type', 'application/json');
+//     XHR.send();
+//     newElement();
+// }
 
