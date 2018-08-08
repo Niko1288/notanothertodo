@@ -13,8 +13,25 @@
 <body>
 <img  src="ToDoListAppGIF.jpeg" alt="My picture" class="center"/>
 
+<section class="container">
+
+    <h1>Helpota elämääsi: luo lista päivän tehtävistä!</h1>
+
+    <div class="new-task-container box">
+
+        <label for="new-task">Lisää uusi tehtävä</label>
+        <input type="text" id="new-task">
+        <button id="addTask">Lisää tehtävä</button>
+
+
+    </div>
+</section><!--container-->/
+
 <h2 onclick="piilotaeka()">Listaa asioita</h2>
 <button style="display: none" id="eka" onclick="haeKaikki()">Hae kaikki</button>
+<table id="tulos"></table>
+
+
 
 <h2 onclick="piilotatoka()">Tehdyt taskit</h2>
 <form id="toka" style="display: none">
@@ -28,10 +45,10 @@
     <input value="Hae" type="button" id="btn1" onclick="haeStatseilla(document.getElementById('createdAT').value);">
 </form>
 
-<table id="tulos"></table>
 
 
 <script>
+
     var lista = document.getElementById("tulos");
     function haunTulokset(tulos) {
         poistaTaulu();

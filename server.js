@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 // luodaan express appi
 const app = express();
@@ -10,6 +11,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(bodyParser.json())
+
 
 const dbConfig = require('./config/database');
 const mongoose = require('mongoose');
@@ -23,6 +25,7 @@ mongoose.connect(dbConfig.url)
     console.log("Ei onnaa yhteys mongoon")
     process.exit();
 });
+app.use(express.static('front-end'));
 
 app.get('/', (req, res) => {
     res.json({message: "Tervetuloa"})

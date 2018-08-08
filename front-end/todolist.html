@@ -42,57 +42,10 @@
         </ul>
 
     </div><!--/complete-list-->
-</section><!--/container-->
-<!--<script src="todolist.js"></script>-->
+</section><!--container-->/
+<script src="todolist.js"></script>
 
 <script>
-
-    var lista = document.getElementById("tulos");
-    function haunTulokset(tulos) {
-        poistaTaulu();
-        var table = document.createElement("table");
-        var tBody = document.createElement("tbody");
-        tBody.setAttribute("id", "tulokset");
-        var tHead = document.createElement("thead");
-        var otsikkoRivi = document.createElement("tr");
-        var otsikko1 = document.createElement("th");
-        otsikko1.appendChild(document.createTextNode("otsikko"));
-        var otsikko2 = document.createElement("th");
-        otsikko2.appendChild(document.createTextNode("sisalto"));
-        otsikkoRivi.appendChild(otsikko1);
-        otsikkoRivi.appendChild(otsikko2);
-        tHead.appendChild(otsikkoRivi);
-        table.appendChild(tHead);
-        table.appendChild(tBody);
-
-        for (var i = 0; i< tulos.length; i++) {
-            var taski = tulos[i];
-            var tulosRivi = document.createElement("tr");
-            var tieto1 = document.createElement("td");
-            tieto1.appendChild(document.createTextNode(taski.title));
-            var tieto2 = document.createElement("td");
-            tieto2.appendChild(document.createTextNode(taski.content));
-            tulosRivi.appendChild(tieto1);
-            tulosRivi.appendChild(tieto2);
-            tBody.appendChild(tulosRivi);
-            lista.appendChild(table);
-        }
-    }
-
-    function haeKaikki() {
-        var pyynto = new XMLHttpRequest();
-        pyynto.onreadystatechange = function () {
-            if (pyynto.readyState === 4 && pyynto.status === 200) {
-                var tulos = JSON.parse(pyynto.responseText);
-
-                console.dir(tulos);
-                haunTulokset(tulos);
-                return lista;
-            }
-        };
-        pyynto.open('GET', 'http://localhost:3000/notes', true);
-        pyynto.send();
-    }
     //SELECT ELEMENTS AND ASSIGN THEM TO VARS
     var newTask = document.querySelector('#new-task');
     var addTaskBtn = document.querySelector('#addTask');
