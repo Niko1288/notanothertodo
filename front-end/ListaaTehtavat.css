@@ -1,6 +1,15 @@
 /* Include the padding and border in an element's total width and height */
 * {
+    max-width:800px;
+    margin: auto;
     box-sizing: border-box;
+}
+
+h2 {
+    font-family: Permanent Marker, Arial;
+    font-size: 60px;
+    color: black;
+    margin-bottom: 0;
 }
 
 /* Remove margins and padding from the list */
@@ -17,6 +26,7 @@ ul li {
     background: #eee;
     font-size: 18px;
     transition: 0.2s;
+    list-style-type: none;
 
     /* make the list items unselectable */
     -webkit-user-select: none;
