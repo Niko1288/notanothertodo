@@ -35,17 +35,80 @@ exports.haeKaikki = (req, res) => {
     });
 };
 
-// Find a single note with a noteId
+// Etsitään yksi tehtävä Id:llä
 exports.haeYksi = (req, res) => {
-
+    Note.findById(req.params.noteId)
+        .then(note => {
+            if (!note) {
+                return res.status(404).send({
+                    message: "Tehtävää ei löytynut ID:llä " + req.params.noteId
+                });
+            }
+            res.send(note);
+        }).catch(err => {
+        if (err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Tehtävää ei löytynut ID:llä " + req.params.noteId
+            });
+        }
+        return res.status(500).send({
+            message: "Tehtävää ei löytynut ID:llä "
+        });
+    });
 };
 
-// Update a note identified by the noteId in the request
+// Päivitetään tehtävä Id:llä joka välitetään objectId:ssä
 exports.paivita = (req, res) => {
-
+    //Validoidaan pyyntö
+    if (!req.body.content) {
+        return res.status(400).send({
+            message: "Tehtävä ei voi olla tyhjä sisällöltään"
+        });
+    }
+    // Etsitään tehtävä ja päivitetään se req. bodyllä
+    Note.findByIdAndUpdate(req.params.noteId, {
+        title: req.body.title || "Tehtävällä ei ole nimeä",
+        content: req.body.content
+    }, {new: true})
+        .then(note => {
+            if (!note) {
+                return res.status(404).send({
+                    message: "Tehtävää ei löytynyt ID:llä " + req.params.noteId
+                });
+            }
+            res.send(note);
+        }).catch(err => {
+        if (err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Tehtävää ei löytynyt ID:llä " + req.params.noteId
+            });
+        }
+        return res.status(500).send({
+            message: "Virhe ID:llä päivitettäessä " + req.params.noteId
+        });
+    });
 };
+
 
 // Delete a note with the specified noteId in the request
 exports.poista = (req, res) => {
+    Note.findByIdAndRemove(req.params.noteId)
+        .then(note => {
+            if (!note) {
+                return res.status(404).send({
+                    message: "Tehtävää ei löytynyt ID:llä " + req.params.noteId
+                });
+            }
+            res.send({message: "Tehtävä poistettu!"});
+        }).catch(err => {
+        if (err.kind === 'ObjectId' || err.name === 'NotFound') {
+            return res.status(404).send({
+                message: "Tehtävää ei löytynyt ID:llä " + req.params.noteId
+            });
+        }
+        return res.status(500).send({
+            message: "Ei pystytty poistamaan ID:llä " + req.params.noteId
 
+        });
+    });
 };

@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// luopaan express appi
+// luodaan express appi
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}))
