@@ -1,3 +1,4 @@
+
 // function reqlistener () {
 //     console.log(this.responseText);
 // }
@@ -9,8 +10,7 @@
 
 
 // tässä haetaan kaikki sivulle onload
-$(function() {
-
+$(function () {
     var $lista = $("#myUL");
     var baseurl = 'http://localhost:3000/notes';
 
@@ -84,7 +84,7 @@ function newElement(uusi) {
     var tieto = document.createElement("input")
     tieto.setAttribute("type", "hidden");
     tieto.value = uusi._id;
-    span.className = "trash";
+    span.className = "close";
     span.appendChild(txt);
     li.appendChild(span);
 
@@ -100,10 +100,6 @@ function newElement(uusi) {
     }
 
 }
-
-
-/////////////////////////////////////
-
 
 
 function poistaTehtava(_id) {
@@ -139,7 +135,7 @@ for (i = 0; i < lista.length; i++) {
 }
 
 // Click on a trash button to hide the current list item
-var trash = document.getElementsByClassName("trash");
+var trash = document.getElementsByClassName("close");
 var i;
 for (i = 0; i < trash.length; i++) {
     trash[i].onclick = function () {
@@ -149,7 +145,6 @@ for (i = 0; i < trash.length; i++) {
 
     }
 }
-
 
 // Add a "checked" symbol when clicking on a list item
 var list = document.querySelector('ul');
@@ -222,3 +217,4 @@ function merkkaaValmiiksi(_id) {
 
 
 // login formi
+
