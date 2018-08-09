@@ -2,16 +2,15 @@ const Note = require('../models/note.model.js');
 
 // Luo ja tallenna uusi merkinta
 exports.luoTehtava = (req, res) => {
-//validoidaan pyynto
-    if (!req.body.content) {
-        return res.status(400).send({
-            message: "Sisalto ei voi olla tyhja"
-        });
-    }
+// //validoidaan pyynto
+//     if (!req.body.content) {
+//         return res.status(400).send({
+//             message: "Sisalto ei voi olla tyhja"
+//         });
+//     }
     //luodaan merkinta
     const note = new Note({
         title: req.body.title || "Ei otsikkoa",
-        content: req.body.content,
         done: false
     });
 
@@ -61,15 +60,14 @@ exports.haeYksi = (req, res) => {
 // Päivitetään tehtävä Id:llä joka välitetään objectId:ssä
 exports.paivita = (req, res) => {
     //Validoidaan pyyntö
-    if (!req.body.content) {
-        return res.status(400).send({
-            message: "Tehtävä ei voi olla tyhjä sisällöltään"
-        });
-    }
+    // if (!req.body.content) {
+    //     return res.status(400).send({
+    //         message: "Tehtävä ei voi olla tyhjä sisällöltään"
+    //     });
+    // }
     // Etsitään tehtävä ja päivitetään se req. bodyllä
     Note.findByIdAndUpdate(req.params.noteId, {
         title: req.body.title || "Tehtävällä ei ole nimeä",
-        content: req.body.content,
         done: req.body.done
     }, {new: true})
         .then(note => {
