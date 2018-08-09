@@ -183,7 +183,7 @@ function merkkaaValmiiksi(_id) {
             console.log(XHR.statusText);
             if (XHR.status === 200) {
                 console.log("vastaus", XHR.responseText);
-                newElement(JSON.parse(XHR.responseText));
+            //    newElement(JSON.parse(XHR.responseText));
             }
         }
     }
