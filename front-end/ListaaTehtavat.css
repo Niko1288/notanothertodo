@@ -1,12 +1,12 @@
 /* Include the padding and border in an element's total width and height */
 * {
-    max-width:800px;
+    max-width:500px;
     margin: auto;
     box-sizing: border-box;
 }
 
 h2 {
-    font-family: Permanent Marker, Arial;
+    font-family: Montserrat, Arial;
     font-size: 60px;
     color: black;
     margin-bottom: 0;
@@ -20,11 +20,12 @@ ul {
 
 /* Style the list items */
 ul li {
+    font-family: Permanent Marker, Arial;
     cursor: pointer;
     position: relative;
     padding: 12px 8px 12px 40px;
     background: #eee;
-    font-size: 18px;
+    font-size: 16px;
     transition: 0.2s;
     list-style-type: none;
 
