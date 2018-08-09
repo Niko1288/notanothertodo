@@ -1,4 +1,3 @@
-
 // function reqlistener () {
 //     console.log(this.responseText);
 // }
@@ -20,7 +19,6 @@ $(function () {
             .then(function (tulokset) {
                 return tulokset.json();
             })
-
             .then(function (taulukko) {
                 for (var i = 0; i < taulukko.length; i++) {
                     var notes = taulukko[i];
@@ -91,9 +89,9 @@ function newElement(uusi) {
     li.appendChild(span);
     valmisteht.appendChild(t);
 
-        trash.onclick = function ()  {
-            var div = this.parentElement;
-            div.style.display = "none";
+    trash.onclick = function () {
+        var div = this.parentElement;
+        div.style.display = "none";
 
     }
 
@@ -101,11 +99,11 @@ function newElement(uusi) {
         poistaTehtava(uusi._id);
         myUL.removeChild(li);
     }
-                       // tässä lisätään done t-elementtiin
+    // tässä lisätään done t-elementtiin
     valmisteht.onclick = function (ev) {
-            ev.target.classList.toggle('checked');
-            merkkaaValmiiksi(uusi._id);
-            console.log("onko merkattu", uusi._id);
+        ev.target.classList.toggle('checked');
+        merkkaaValmiiksi(uusi._id);
+        console.log("onko merkattu", uusi._id);
 
     }
 
@@ -178,7 +176,6 @@ function merkkaaValmiiksi(_id) {
 }
 
 
-
 //////////////////////////
 
 // funktio jota kutsumalla haetaan kaikki tehtävät tietokannasta
@@ -200,7 +197,6 @@ function merkkaaValmiiksi(_id) {
 //     XHR.send();
 //     newElement();
 // }
-
 
 
 // login formi

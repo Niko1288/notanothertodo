@@ -5,7 +5,9 @@ module.exports = (app) => {
     app.post('/notes', notes.luoTehtava);
 
     // Retrieve all Notes
-    app.get('/notes', notes.haeKaikki);
+    app.get('/notes', notes.haeKaikkieiValmiit);
+
+    app.get('/notes/valmiit',notes.haeKaikkivalmiit)
 
     // Retrieve a single Note with noteId
     app.get('/notes/:noteId', notes.haeYksi);
