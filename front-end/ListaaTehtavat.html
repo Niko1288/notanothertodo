@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Todo</title>
     <link rel="stylesheet" type="text/css" href="ListaaTehtavat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Permanent Marker' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
@@ -11,18 +13,81 @@
 <body>
 <div id="myDIV" class="header">
     <h2>Just Do It</h2>
-    <input type="text" id="myInput" placeholder="Title...">
-    <span onclick="uusiTehtava()" class="addBtn">Lisää</span>
+    <input type="text" id="myInput" placeholder="Kirjaa uusi todo...">
+    <span onclick="uusiTehtava()" class="addBtn">Add</span>
 </div>
 
 <ul id="myUL">
-
-
+    <!--<li class="checked">Tee fronttia</li>-->
+    <!--<li>Opettele React</li>-->
     <!--<li onclick="poistaTehtava()">Tee CRUD toiminnallisuus <button class="delete">Delete</button></li>-->
-
 </ul>
 
+
+<div id="LOGIN" class="header">
+<h3>Haluatko tallentaa todot? kirjaudu!</h3>
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Kirjaudu</button>
+<div id="id01" class="modal">
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="trash" title="Close Modal">&times;</span>
+            <img src="ToDoListAppGIF.jpeg" alt="Avatar" class="avatar">
+        </div>
+            <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+            <button type="submit">Login</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+            </div>
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    </form>
+</div>
+</div>
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">Valmiit tehtävät</a>
+    <a href="#">Prioriteettisivu</a>
+    <a href="#">Omat tiedot</a>
+</div>
+<!-- Use any element to open the sidenav -->
+<h3 onclick="openNav()" class="button">Muuta toiminnallisuutta</h3>
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div id="main"></div>
+
+
 <script src="ListaaTehtavat.js"></script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    // When the user clicks anywhere outside of the modal, trash it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";}}
+</script>
+
+<script>
+    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+</script>
+
 
 </body>
 </html>
