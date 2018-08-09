@@ -11,7 +11,8 @@ exports.luoTehtava = (req, res) => {
     //luodaan merkinta
     const note = new Note({
         title: req.body.title || "Ei otsikkoa",
-        content: req.body.content
+        content: req.body.content,
+        done: false
     });
 
     note.save()
@@ -68,7 +69,8 @@ exports.paivita = (req, res) => {
     // Etsitään tehtävä ja päivitetään se req. bodyllä
     Note.findByIdAndUpdate(req.params.noteId, {
         title: req.body.title || "Tehtävällä ei ole nimeä",
-        content: req.body.content
+        content: req.body.content,
+        done: req.body.done
     }, {new: true})
         .then(note => {
             if (!note) {
