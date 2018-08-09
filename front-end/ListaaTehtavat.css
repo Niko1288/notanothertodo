@@ -78,7 +78,7 @@ ul li.checked::before {
 }
 
 /* Style the trash button */
-.trash {
+.close {
     position: relative;
     right: 0;
     top: 0;
@@ -87,7 +87,7 @@ ul li.checked::before {
     background-color: rgba(134, 137, 130, 0.74);
 }
 
-.trash:hover {
+.close:hover {
     background-color: rgba(67, 69, 65, 0.88);
     color: #b1b1b1;
 }
@@ -224,7 +224,7 @@ span.psw {
 }
 
 /* The Close Button (x) */
-.trash {
+.close {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -233,7 +233,7 @@ span.psw {
     transform: translate(0%, -50%);
 }
 
-.trash:hover {background: #bbb;}
+.close:hover {background: #bbb;}
 
 
 /* Add Zoom Animation */

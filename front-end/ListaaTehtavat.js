@@ -1,16 +1,5 @@
-function reqlistener () {
-    console.log(this.responseText);
-}
-
-var oreq = new XMLHttpRequest();
-oreq.addEventListener("load", reqlistener);
-oreq.open("GET", "http://localhost:3000/notes");
-oreq.send();
-
-
 // tässä haetaan kaikki sivulle onload
-$(function() {
-
+$(function () {
     var $lista = $("#myUL");
     var baseurl = 'http://localhost:3000/notes';
 
@@ -24,23 +13,8 @@ $(function() {
                 for (var i = 0; i < taulukko.length; i++) {
                     var notes = taulukko[i];
                     console.log(notes);
-                    // var span = document.createElement("SPAN");
-                    // var txt = document.createTextNode("\u00D7");
-                    // var tieto = document.createElement("input")
-                    // tieto.setAttribute("type", "hidden");
-                    // tieto.value = uusi._id;
-                    // span.className = "trash";
-                    // span.appendChild(txt);
-                    // li.appendChild(span);
-                    //     taulukko[i].onclick = function () {
-                    //         var div = this.parentElement;
-                    //         div.style.display = "none";
-                    //         poistaTehtava();
-                    //     }
-                    $("<li>")
-                        .text(notes.title)
-                        .appendTo($lista);
 
+                    newElement(notes);
                 }
             })
     }
@@ -100,26 +74,21 @@ function newElement(uusi) {
     var tieto = document.createElement("input")
     tieto.setAttribute("type", "hidden");
     tieto.value = uusi._id;
-    span.className = "trash";
+    span.className = "close";
     span.appendChild(txt);
     li.appendChild(span);
 
-        trash.onclick = function () {
+    trash.onclick = function () {
         var div = this.parentElement;
         div.style.display = "none";
     }
 
     span.onclick = function () {
         poistaTehtava(uusi._id);
-        poistaTehtava();
         myUL.removeChild(li);
     }
 
 }
-
-
-/////////////////////////////////////
-
 
 
 function poistaTehtava(_id) {
@@ -155,7 +124,7 @@ for (i = 0; i < lista.length; i++) {
 }
 
 // Click on a trash button to hide the current list item
-var trash = document.getElementsByClassName("trash");
+var trash = document.getElementsByClassName("close");
 var i;
 for (i = 0; i < trash.length; i++) {
     trash[i].onclick = function () {
@@ -166,7 +135,6 @@ for (i = 0; i < trash.length; i++) {
     }
 }
 
-
 // Add a "checked" symbol when clicking on a list item
 var list = document.querySelector('ul');
 list.addEventListener('click', function (ev) {
@@ -175,30 +143,3 @@ list.addEventListener('click', function (ev) {
         }
     },
     false);
-
-
-//////////////////////////
-
-// funktio jota kutsumalla haetaan kaikki tehtävät tietokannasta
-//
-// function haeKaikki() {
-//     var XHR = new XMLHttpRequest();
-//     XHR.onreadystatechange = function () {
-//         console.log("DBG", XHR.readyState);
-//         if (XHR.readyState === 4) {
-//             console.log(XHR.statusText);
-//             if (XHR.status === 200) {
-//                 console.log("vastaus", XHR.responseText);
-//                 newElement(JSON.parse(XHR.responseText));
-//             }
-//         }
-//     }
-//     XHR.open('GET', 'http://localhost:3000/notes');
-//     XHR.setRequestHeader('Content-Type', 'application/json');
-//     XHR.send();
-//     newElement();
-// }
-
-
-
-// login formi
