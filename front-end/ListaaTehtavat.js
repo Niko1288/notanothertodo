@@ -157,65 +157,38 @@ list.addEventListener('click', function (ev) {
     },
     false);
 
-//
-// function merkkaaValmiiksi(_id) {
-//     // funktio joka käyttää update
-//     var XHR = new XMLHttpRequest();
-//     // Define what happens on successful data submission
-//     XHR.addEventListener('load', function (event) {
-//         alert('Yeah! Data sent and response loaded.');
-//     });
-//
-//     var lahetettavadata2 = {
-//         done: true
-//     }
-//
-//     XHR.onreadystatechange = function () {
-//         console.log("DBG", XHR.readyState);
-//         if (XHR.readyState === 4) {
-//             console.log(XHR.statusText);
-//             if (XHR.status === 200) {
-//                 console.log("vastaus", XHR.responseText);
-//                 newElement(JSON.parse(XHR.responseText));
-//             }
-//         }
-//     }
-//     // Define what happens in case of error
-//     XHR.addEventListener('error', function (event) {
-//         alert('Oops! Something goes wrong.');
-//     });
-//     // Set up our request
-//     XHR.open('PUT', 'http://localhost:3000/notes/' + _id);
-//     // Add the required HTTP header for form data POST requests
-//     XHR.setRequestHeader('Content-Type', 'application/json');
-//     // Finally, send our data.
-//     XHR.send(JSON.stringify(lahetettavadata2));
-// }
 
+function merkkaaValmiiksi(_id) {
+    // funktio joka käyttää update
+    var XHR = new XMLHttpRequest();
+    // Define what happens on successful data submission
+    XHR.addEventListener('load', function (event) {
+        alert('Yeah! Data sent and response loaded.');
+    });
 
-//////////////////////////
+    var lahetettavadata2 = {
+        done: true
+    }
 
-// funktio jota kutsumalla haetaan kaikki tehtävät tietokannasta
-//
-// function haeKaikki() {
-//     var XHR = new XMLHttpRequest();
-//     XHR.onreadystatechange = function () {
-//         console.log("DBG", XHR.readyState);
-//         if (XHR.readyState === 4) {
-//             console.log(XHR.statusText);
-//             if (XHR.status === 200) {
-//                 console.log("vastaus", XHR.responseText);
-//                 newElement(JSON.parse(XHR.responseText));
-//             }
-//         }
-//     }
-//     XHR.open('GET', 'http://localhost:3000/notes');
-//     XHR.setRequestHeader('Content-Type', 'application/json');
-//     XHR.send();
-//     newElement();
-// }
-
-
-
-// login formi
+    XHR.onreadystatechange = function () {
+        console.log("DBG", XHR.readyState);
+        if (XHR.readyState === 4) {
+            console.log(XHR.statusText);
+            if (XHR.status === 200) {
+                console.log("vastaus", XHR.responseText);
+                newElement(JSON.parse(XHR.responseText));
+            }
+        }
+    }
+    // Define what happens in case of error
+    XHR.addEventListener('error', function (event) {
+        alert('Oops! Something goes wrong.');
+    });
+    // Set up our request
+    XHR.open('PUT', 'http://localhost:3000/notes/' + _id);
+    // Add the required HTTP header for form data POST requests
+    XHR.setRequestHeader('Content-Type', 'application/json');
+    // Finally, send our data.
+    XHR.send(JSON.stringify(lahetettavadata2));
+}
 
