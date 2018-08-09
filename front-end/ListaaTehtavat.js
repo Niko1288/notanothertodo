@@ -20,13 +20,13 @@ $(function () {
             .then(function (tulokset) {
                 return tulokset.json();
             })
+
             .then(function (taulukko) {
                 for (var i = 0; i < taulukko.length; i++) {
                     var notes = taulukko[i];
                     console.log(notes);
                     newElement(notes);
                 }
-
             })
     }
 
@@ -76,8 +76,9 @@ function newElement(uusi) {
     var inputValue = uusi.title;
     var t = document.createTextNode(inputValue);
     var myUL = document.getElementById("myUL");
+    var valmisteht = document.createElement("span");
     myUL.appendChild(li);
-    li.appendChild(t);
+    li.appendChild(valmisteht);
     document.getElementById("myInput").value = "";
 
     var span = document.createElement("SPAN");
@@ -88,6 +89,7 @@ function newElement(uusi) {
     span.className = "close";
     span.appendChild(txt);
     li.appendChild(span);
+    valmisteht.appendChild(t);
 
         trash.onclick = function ()  {
             var div = this.parentElement;
@@ -98,6 +100,13 @@ function newElement(uusi) {
     span.onclick = function () {
         poistaTehtava(uusi._id);
         myUL.removeChild(li);
+    }
+                       // tässä lisätään done t-elementtiin
+    valmisteht.onclick = function (ev) {
+            ev.target.classList.toggle('checked');
+            merkkaaValmiiksi(uusi._id);
+            console.log("onko merkattu", uusi._id);
+
     }
 
 }
@@ -147,50 +156,27 @@ for (i = 0; i < trash.length; i++) {
     }
 }
 
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function (ev) {
-        if (ev.target.tagName === 'LI') {
-            ev.target.classList.toggle('checked');
-            merkkaaValmiiksi();
-        }
-    },
-    false);
 
-//
-// function merkkaaValmiiksi(_id) {
-//     // funktio joka käyttää update
-//     var XHR = new XMLHttpRequest();
-//     // Define what happens on successful data submission
-//     XHR.addEventListener('load', function (event) {
-//         alert('Yeah! Data sent and response loaded.');
-//     });
-//
-//     var lahetettavadata2 = {
-//         done: true
-//     }
-//
-//     XHR.onreadystatechange = function () {
-//         console.log("DBG", XHR.readyState);
-//         if (XHR.readyState === 4) {
-//             console.log(XHR.statusText);
-//             if (XHR.status === 200) {
-//                 console.log("vastaus", XHR.responseText);
-//                 newElement(JSON.parse(XHR.responseText));
-//             }
-//         }
-//     }
-//     // Define what happens in case of error
-//     XHR.addEventListener('error', function (event) {
-//         alert('Oops! Something goes wrong.');
-//     });
-//     // Set up our request
-//     XHR.open('PUT', 'http://localhost:3000/notes/' + _id);
-//     // Add the required HTTP header for form data POST requests
-//     XHR.setRequestHeader('Content-Type', 'application/json');
-//     // Finally, send our data.
-//     XHR.send(JSON.stringify(lahetettavadata2));
-// }
+function merkkaaValmiiksi(_id) {
+    var XHR = new XMLHttpRequest();
+    var lahetettavadata2 = {
+        done: true
+    }
+    XHR.onreadystatechange = function () {
+        console.log("DBG", XHR.readyState);
+        if (XHR.readyState === 4) {
+            console.log(XHR.statusText);
+            if (XHR.status === 200) {
+                console.log("vastaus", XHR.responseText);
+                // newElement(JSON.parse(XHR.responseText));
+            }
+        }
+    }
+    XHR.open('PUT', 'http://localhost:3000/notes/' + _id);
+    XHR.setRequestHeader('Content-Type', 'application/json');
+    XHR.send(JSON.stringify(lahetettavadata2));
+}
+
 
 
 //////////////////////////

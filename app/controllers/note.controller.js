@@ -67,7 +67,6 @@ exports.paivita = (req, res) => {
     // }
     // Etsitään tehtävä ja päivitetään se req. bodyllä
     Note.findByIdAndUpdate(req.params.noteId, {
-        title: req.body.title || "Tehtävällä ei ole nimeä",
         done: req.body.done
     }, {new: true})
         .then(note => {
