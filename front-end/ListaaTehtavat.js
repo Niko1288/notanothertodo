@@ -32,7 +32,8 @@ function uusiTehtava() {
     });
     var lahetettavadata = {
         title: document.getElementById('myInput').value,
-        content: 'placeholder'
+        content: 'placeholder',
+        done: false
     }
 
     XHR.onreadystatechange = function () {

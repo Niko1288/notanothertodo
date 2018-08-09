@@ -11,7 +11,8 @@ exports.luoTehtava = (req, res) => {
     //luodaan merkinta
     const note = new Note({
         title: req.body.title || "Ei otsikkoa",
-        content: req.body.content
+        content: req.body.content,
+        done: false
     });
 
     note.save()
