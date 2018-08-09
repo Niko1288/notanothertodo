@@ -19,21 +19,35 @@ exports.luoTehtava = (req, res) => {
             res.send(data);
         }).catch(err => {
         res.status(500).send({
-            message: err.message || "Jotain häslinkiä tapahtui"
+            message: err.message || "Ei voitu luoda uutta"
         });
     });
 };
 
-exports.haeKaikki = (req, res) => {
-    Note.find()
+exports.haeKaikkieiValmiit = (req, res) => {
+    Note.find({'done': 'false'})
         .then(notes => {
             res.send(notes);
         }).catch(err => {
         res.status(500).send({
-            message: err.message || "Jotain häslinkiä tapahtui"
+            message: err.message || "Ei löydetty eivalmiita"
         });
     });
 };
+
+
+exports.haeKaikkivalmiit =  (req, res) => {
+    Note.find({'done': 'true'})
+        .then (notes => {
+            res.send(notes);
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Ei löydetty valmiita"
+            });
+    });
+};
+
+
 
 // Etsitään yksi tehtävä Id:llä
 exports.haeYksi = (req, res) => {
@@ -67,7 +81,6 @@ exports.paivita = (req, res) => {
     // }
     // Etsitään tehtävä ja päivitetään se req. bodyllä
     Note.findByIdAndUpdate(req.params.noteId, {
-        title: req.body.title || "Tehtävällä ei ole nimeä",
         done: req.body.done
     }, {new: true})
         .then(note => {
