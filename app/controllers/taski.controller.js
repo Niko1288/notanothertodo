@@ -1,20 +1,13 @@
-const Note = require('../models/note.model.js');
+const Taski = require('../models/taski.model.js');
 
 // Luo ja tallenna uusi merkinta
 exports.luoTehtava = (req, res) => {
-// //validoidaan pyynto
-//     if (!req.body.content) {
-//         return res.status(400).send({
-//             message: "Sisalto ei voi olla tyhja"
-//         });
-//     }
     //luodaan merkinta
-    const note = new Note({
+    const taski = new Taski({
         title: req.body.title || "Ei otsikkoa",
         done: false
     });
-
-    note.save()
+    taski.save()
         .then(data => {
             res.send(data);
         }).catch(err => {
@@ -25,7 +18,7 @@ exports.luoTehtava = (req, res) => {
 };
 
 exports.haeKaikkieiValmiit = (req, res) => {
-    Note.find({'done': 'false'})
+    Taski.find({'done': 'false'})
         .then(notes => {
             res.send(notes);
         }).catch(err => {
@@ -37,7 +30,7 @@ exports.haeKaikkieiValmiit = (req, res) => {
 
 
 exports.haeKaikkivalmiit =  (req, res) => {
-    Note.find({'done': 'true'})
+    Taski.find({'done': 'true'})
         .then (notes => {
             res.send(notes);
         }).catch(err => {
@@ -51,7 +44,7 @@ exports.haeKaikkivalmiit =  (req, res) => {
 
 // Etsitään yksi tehtävä Id:llä
 exports.haeYksi = (req, res) => {
-    Note.findById(req.params.noteId)
+    Taski.findById(req.params.noteId)
         .then(note => {
             if (!note) {
                 return res.status(404).send({
@@ -73,14 +66,8 @@ exports.haeYksi = (req, res) => {
 
 // Päivitetään tehtävä Id:llä joka välitetään objectId:ssä
 exports.paivita = (req, res) => {
-    //Validoidaan pyyntö
-    // if (!req.body.content) {
-    //     return res.status(400).send({
-    //         message: "Tehtävä ei voi olla tyhjä sisällöltään"
-    //     });
-    // }
     // Etsitään tehtävä ja päivitetään se req. bodyllä
-    Note.findByIdAndUpdate(req.params.noteId, {
+    Taski.findByIdAndUpdate(req.params.noteId, {
         done: req.body.done
     }, {new: true})
         .then(note => {
@@ -103,9 +90,9 @@ exports.paivita = (req, res) => {
 };
 
 
-// Delete a note with the specified noteId in the request
+// poistetaan id:llä
 exports.poista = (req, res) => {
-    Note.findByIdAndRemove(req.params.noteId)
+    Taski.findByIdAndRemove(req.params.noteId)
         .then(note => {
             if (!note) {
                 return res.status(404).send({

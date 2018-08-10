@@ -11,8 +11,12 @@
 </head>
 
 <body>
+    <div class="topnav-right">
+        <a href="#about">Kirjautuneena sisään: MasTODOntti</a>
+    </div>
+</div>
 <div id="myDIV" class="header">
-    <h2>Valmiit tehtavat</h2>
+    <h2>Valmiit tehtävät</h2>
     <input type="text" id="myInput" placeholder="Etsi tehtyjä tehtäviä...">
     <span onclick="uusiTehtava()" class="addBtn">Etsi</span>
 </div>
@@ -29,21 +33,19 @@
         <form class="modal-content animate" action="/action_page.php">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <img src="ToDoListAppGIF.jpeg" alt="Avatar" class="avatar">
+                <img src="mastodont.jpg" alt="Avatar" class="avatar">
             </div>
             <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-                <button type="submit">Login</button>
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-            </div>
-            <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
+                <h1>Login</h1>
+                <!--<form method="POST" action="/login">-->
+                <form>
+                    <input type="text" name="username" placeholder="username">
+                    <input type="password" name="password" placeholder="password">
+                    <button><a href="ListaaTehtavat.html"></a>Kirjaudu</button>
+                </form>
+                <li><a href="/register">Sign Up</a></li>
+                <li><a href="/logout">Logout!</a></li>
+                <li><a href="/login">Login!</a></li>
             </div>
         </form>
     </div>
@@ -52,8 +54,8 @@
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="ValmiitTehtavat.html">Arkisto</a>
-    <a href="Prioriteettisivu.html">Prioriteettisivu</a>
-    <a href="#">Omat tiedot</a>
+    <a href="ListaaTehtavat.html">Tekemättömät tehtävät</a>
+
 </div>
 <!-- Use any element to open the sidenav -->
 <h3 onclick="openNav()" class="button">Avaa menu</h3>
