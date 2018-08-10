@@ -12,7 +12,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(bodyParser.json())
 
-
 const dbConfig = require('./config/database');
 const mongoose = require('mongoose');
 
@@ -33,6 +32,5 @@ app.get('/', (req, res) => {
 
 //otetaan käyttöön muistioiden reitit
 require('./app/routes/taski.routes')(app);
-
 
 module.exports = app;

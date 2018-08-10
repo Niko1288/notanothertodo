@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
-const TaskiSchema = mongoose.Schema({
+const NoteSchema = mongoose.Schema({
     title: String,
-    done: Boolean,
-    priority: Number
+    done: Boolean
 }, {
     timestamps: true
 });
 
-module.exports = mongoose.model('Note', TaskiSchema);
+module.exports = mongoose.model('Note', NoteSchema);

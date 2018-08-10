@@ -11,11 +11,11 @@ module.exports = (app) => {
     app.get('/taskit/valmiit',notes.haeKaikkivalmiit)
 
     // Hse yksi taski Id:lla
-    app.get('/taskit/:taskiId', notes.haeYksi);
+    app.get('/taskit/:noteId', notes.haeYksi);
 
     // Päivitä taski Id:lla
-    app.put('/taskit/:taskiId', notes.paivita);
+    app.put('/taskit/:noteId', notes.paivita);
 
     // Poista taski Id:lla
-    app.delete('/taskit/:taskiId', notes.poista);
+    app.delete('/taskit/:noteId', notes.poista);
 }

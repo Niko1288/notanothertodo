@@ -5,7 +5,6 @@ $(function () {
     var baseurl = 'http://localhost:3000/taskit/valmiit';
 
     function haekaikki() {
-        console.log("jotain");
         fetch(baseurl)
             .then(function (tulokset) {
                 return tulokset.json();
@@ -45,7 +44,6 @@ function uusiTehtava() {
             }
         }
     }
-    // Define what happens in case of error
     XHR.addEventListener('error', function (event) {
         alert('ei voitu lisätä');
     });
@@ -121,8 +119,6 @@ function poistaTehtava(_id) {
     XHR.send();
 }
 
-
-// Luodaan "poista" button and append it to each list item
 var lista = document.getElementsByTagName("LI");
 var i;
 for (i = 0; i < lista.length; i++) {
@@ -133,7 +129,6 @@ for (i = 0; i < lista.length; i++) {
     lista[i].appendChild(span);
 }
 
-// Click on a trash button to hide the current list item
 var trash = document.getElementsByClassName("close");
 var i;
 for (i = 0; i < trash.length; i++) {
