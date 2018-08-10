@@ -4,7 +4,6 @@ $(function () {
     var baseurl = 'http://localhost:3000/taskit';
 
     function haekaikki() {
-        console.log("jotain");
         fetch(baseurl)
             .then(function (tulokset) {
                 return tulokset.json();
