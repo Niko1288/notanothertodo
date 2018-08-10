@@ -1,9 +1,7 @@
-
-
-// tässä haetaan kaikki sivulle onload
+// tässä haetaan kaikki tekemättömät tehtävät sivulle, sivun latauksen yhteydessä
 $(function () {
     var $lista = $("#myUL");
-    var baseurl = 'http://localhost:3000/notes';
+    var baseurl = 'http://localhost:3000/taskit';
 
     function haekaikki() {
         console.log("jotain");
@@ -43,21 +41,21 @@ function uusiTehtava() {
             }
         }
     }
-    // Define what happens in case of error
+    // Tapahtuu, jos tulee virhe
     XHR.addEventListener('error', function (event) {
-        alert('Oops! Something goes wrong uusitehtava.');
+        alert('jotain meni vikaan lähetettäessä.');
     });
-    // Set up our request
-    XHR.open('POST', 'http://localhost:3000/notes');
-    // Add the required HTTP header for form data POST requests
+    // Tehdään pyyntö
+    XHR.open('POST', 'http://localhost:3000/taskit');
+    // Lisää pyydetyn HTTP headerin formi tiedolle POST-pyynnön yhteydessä
     XHR.setRequestHeader('Content-Type', 'application/json');
-    // Finally, send our data.
+    // Lopulta lähettää datan
     XHR.send(JSON.stringify(lahetettavadata));
 
 
 }
 
-// lisää HTML sivulle uuden tehtäväpalkin
+// lisää HTML sivulle uuden tehtäväelementin
 function newElement(uusi) {
     var li = document.createElement("li");
     var inputValue = uusi.title;
@@ -98,7 +96,7 @@ function newElement(uusi) {
 
 }
 
-
+// luodaan funktio, joka poistaa tehtävän id:llä
 function poistaTehtava(_id) {
     var XHR = new XMLHttpRequest();
 
@@ -112,15 +110,15 @@ function poistaTehtava(_id) {
         }
     }
     XHR.addEventListener('error', function (event) {
-        alert('Oops! Something goes wrong.');
+        alert('jokin meni vikaan, ei voitu poistaa');
     });
-    XHR.open('DELETE', 'http://localhost:3000/notes/' + _id);
+    XHR.open('DELETE', 'http://localhost:3000/taskit/' + _id);
     XHR.setRequestHeader('Content-Type', 'application/json');
     XHR.send();
 }
 
 
-// Luodaan "poista" button and append it to each list item
+// Luodaan "poista" button ja lisätään se jokaiseen lista-elementtiin
 var lista = document.getElementsByTagName("LI");
 var i;
 for (i = 0; i < lista.length; i++) {
@@ -131,7 +129,7 @@ for (i = 0; i < lista.length; i++) {
     lista[i].appendChild(span);
 }
 
-// Click on a trash button to hide the current list item
+// klikkaa trash nappulaa listaelementin piilottamiseksi
 var trash = document.getElementsByClassName("close");
 var i;
 for (i = 0; i < trash.length; i++) {
@@ -144,59 +142,26 @@ for (i = 0; i < trash.length; i++) {
 }
 
 
-
+// funktio, joka merkkaa tapahtuman valmiiksi id:llä
 function merkkaaValmiiksi(_id) {
     var XHR = new XMLHttpRequest();
-    var lahetettavadata2 = {
-        done: true
-    }
-    XHR.onreadystatechange = function () {
-        console.log("DBG", XHR.readyState);
-        if (XHR.readyState === 4) {
-            console.log(XHR.statusText);
-            if (XHR.status === 200) {
-                console.log("vastaus", XHR.responseText);
-                // newElement(JSON.parse(XHR.responseText));
-            }
-        }
-    }
-    XHR.open('PUT', 'http://localhost:3000/notes/' + _id);
-    XHR.setRequestHeader('Content-Type', 'application/json');
-    XHR.send(JSON.stringify(lahetettavadata2));
-}
-
-
-
-function merkkaaValmiiksi(_id) {
-    // funktio joka käyttää update
-    var XHR = new XMLHttpRequest();
-    // Define what happens on successful data submission
-
-
-    var lahetettavadata2 = {
-        done: true
-    }
-
-    XHR.onreadystatechange = function () {
-        console.log("DBG", XHR.readyState);
-        if (XHR.readyState === 4) {
-            console.log(XHR.statusText);
-            if (XHR.status === 200) {
-                console.log("vastaus", XHR.responseText);
-                newElement(JSON.parse(XHR.responseText));
-            }
-        }
-    }
-    // Define what happens in case of error
-    XHR.addEventListener('error', function (event) {
-        alert('Oops! Something goes wrong.');
+    XHR.addEventListener('load', function (event) {
+        alert('Mahtavaa, homma hanskassa! Muista palkita itsesi kaljalla koska perjantai!');
     });
-    // Set up our request
-    XHR.open('PUT', 'http://localhost:3000/notes/' + _id);
-    // Add the required HTTP header for form data POST requests
+
+    var lahetettavadata2 = {
+        done: true
+    }
+    XHR.onreadystatechange = function () {
+        if (XHR.readyState === 4) {
+            if (XHR.status === 200) {
+            }
+        }
+    }
+    XHR.open('PUT', 'http://localhost:3000/taskit/' + _id);
     XHR.setRequestHeader('Content-Type', 'application/json');
-    // Finally, send our data.
     XHR.send(JSON.stringify(lahetettavadata2));
 }
+
 
 

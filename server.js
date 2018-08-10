@@ -18,7 +18,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(dbConfig.url)
+mongoose.connect(dbConfig.url, { useNewUrlParser: true })
     .then(() => {
         console.log("Yhdistetty mongoon");
     }).catch(err => {
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 //otetaan käyttöön muistioiden reitit
-require('./app/routes/note.routes')(app);
+require('./app/routes/taski.routes')(app);
 
 
 module.exports = app;

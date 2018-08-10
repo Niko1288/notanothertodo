@@ -1,18 +1,8 @@
 
-// function reqlistener () {
-//     console.log(this.responseText);
-// }
-//
-// var oreq = new XMLHttpRequest();
-// oreq.addEventListener("load", reqlistener);
-// oreq.open("GET", "http://localhost:3000/notes");
-// oreq.send();
-
-
 // tässä haetaan kaikki sivulle onload
 $(function () {
     var $lista = $("#myUL");
-    var baseurl = 'http://localhost:3000/notes/valmiit';
+    var baseurl = 'http://localhost:3000/taskit/valmiit';
 
     function haekaikki() {
         console.log("jotain");
@@ -38,7 +28,7 @@ function uusiTehtava() {
     var XHR = new XMLHttpRequest();
     // Define what happens on successful data submission
     XHR.addEventListener('load', function (event) {
-        alert('Yeah! Data sent and response loaded.');
+        alert('Yeah! lähettetty on!.');
     });
     var lahetettavadata = {
         title: document.getElementById('myInput').value,
@@ -57,10 +47,10 @@ function uusiTehtava() {
     }
     // Define what happens in case of error
     XHR.addEventListener('error', function (event) {
-        alert('Oops! Something goes wrong.');
+        alert('ei voitu lisätä');
     });
     // Set up our request
-    XHR.open('POST', 'http://localhost:3000/notes');
+    XHR.open('POST', 'http://localhost:3000/taskit');
     // Add the required HTTP header for form data POST requests
     XHR.setRequestHeader('Content-Type', 'application/json');
     // Finally, send our data.
@@ -126,7 +116,7 @@ function poistaTehtava(_id) {
     XHR.addEventListener('error', function (event) {
         alert('Oops! Something goes wrong.');
     });
-    XHR.open('DELETE', 'http://localhost:3000/notes/' + _id);
+    XHR.open('DELETE', 'http://localhost:3000/taskit/' + _id);
     XHR.setRequestHeader('Content-Type', 'application/json');
     XHR.send();
 }
@@ -171,34 +161,7 @@ function merkkaaValmiiksi(_id) {
             }
         }
     }
-    XHR.open('PUT', 'http://localhost:3000/notes/' + _id);
+    XHR.open('PUT', 'http://localhost:3000/taskit/' + _id);
     XHR.setRequestHeader('Content-Type', 'application/json');
     XHR.send(JSON.stringify(lahetettavadata2));
 }
-
-
-//////////////////////////
-
-// funktio jota kutsumalla haetaan kaikki tehtävät tietokannasta
-//
-// function haeKaikki() {
-//     var XHR = new XMLHttpRequest();
-//     XHR.onreadystatechange = function () {
-//         console.log("DBG", XHR.readyState);
-//         if (XHR.readyState === 4) {
-//             console.log(XHR.statusText);
-//             if (XHR.status === 200) {
-//                 console.log("vastaus", XHR.responseText);
-//                 newElement(JSON.parse(XHR.responseText));
-//             }
-//         }
-//     }
-//     XHR.open('GET', 'http://localhost:3000/notes');
-//     XHR.setRequestHeader('Content-Type', 'application/json');
-//     XHR.send();
-//     newElement();
-// }
-
-
-// login formi
-
